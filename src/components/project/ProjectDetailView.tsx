@@ -15,7 +15,7 @@ const outcomeLabels = {
 };
 
 export function ProjectDetailView({ project, detail, active, onOpen }: { project: Project; detail: ProjectDetail; active: string; onOpen: (image: ProjectImage) => void }) {
-  const overview = [['Period', project.period], ['Role', project.role], ['Contribution', project.contribution], ['Team', project.team ?? '프로젝트별 협업'], ['Status', project.status], ['Tools', project.tools.join(' · ')]];
+  const overview = [['Period', project.period], ['Company', project.company ?? project.service], ['Role', project.role], ['Contribution', project.contribution], ['Status', project.status], ['Tools', project.tools.join(' · ')]];
   return <>
     <header className="detail-hero"><Link to="/work" className="back-link"><ArrowLeft size={17} /> 전체 프로젝트</Link><div className="detail-hero__grid"><div><p className="eyebrow">Project {String(project.order).padStart(2, '0')} · {project.category.join(' · ')}</p><p className="detail-service">{project.service}</p><h1>{project.title}</h1><p className="detail-tagline">{project.tagline}</p><div className="tag-list">{project.tags.map((tag) => <span className="tag" key={tag}>{tag}</span>)}</div></div>{project.thumbnail ? <ImagePlaceholder image={project.thumbnail} onOpen={() => onOpen(project.thumbnail!)} /> : null}</div></header>
     <section className="glance-grid" aria-label="프로젝트 개요">{overview.map(([label, value]) => <div key={label}><span>{label}</span><p>{value}</p></div>)}</section>
