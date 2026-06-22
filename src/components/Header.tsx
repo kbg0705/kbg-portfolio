@@ -1,10 +1,7 @@
 import { Download } from 'lucide-react';
-import { EmailCopyButton } from './EmailCopyButton';
 
 type HeaderProps = {
-  email: string;
   activeSection: string;
-  onCopyEmail: () => void;
 };
 
 const navItems = [
@@ -13,7 +10,7 @@ const navItems = [
   { id: 'about', label: 'ABOUT', href: '#about' },
 ];
 
-export function Header({ email, activeSection, onCopyEmail }: HeaderProps) {
+export function Header({ activeSection }: HeaderProps) {
   return (
     <header className="site-header" data-scrolled={activeSection !== 'top'}>
       <a className="brand-lockup" href="#top" aria-label="메인 상단으로 이동">
@@ -35,7 +32,6 @@ export function Header({ email, activeSection, onCopyEmail }: HeaderProps) {
           RESUME
           <Download size={14} aria-hidden="true" />
         </a>
-        <EmailCopyButton email={email} onCopy={onCopyEmail} variant="text" />
       </nav>
     </header>
   );
