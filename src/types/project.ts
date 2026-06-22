@@ -40,6 +40,8 @@ export type Project = {
   order: number;
   tier: ProjectTier;
   service: string;
+  company?: string;
+  cardMeta?: string;
   category: string[];
   title: string;
   tagline: string;
