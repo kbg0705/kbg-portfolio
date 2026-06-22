@@ -9,7 +9,7 @@
     "lint": "tsc -b",
     "typecheck": "tsc -b",
     "build": "tsc -b && vite build --configLoader runner",
-    "build:github": "tsc -b && vite build --configLoader runner --base=/miricanvas-junior-pm-portfolio/",
+    "build:github": "tsc -b && vite build --configLoader runner --base=/miricanvas-junior-pm-portfolio/ && node -e \"require('fs').copyFileSync('dist/index.html','dist/404.html')\"",
     "preview": "vite preview --host 0.0.0.0",
     "deploy:check": "pnpm run build"
   },
