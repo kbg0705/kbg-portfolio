@@ -34,5 +34,4 @@ export const visangAidtDetail: ProjectDetail = {
   confidentialityNote: '공공 프로젝트 및 회사 내부 정보 보호를 위해 실제 문서와 화면은 비식별화하거나 placeholder로 제공합니다.',
   images: [],
   previousProject: 'gachon-metaverse-campus',
-  nextProject: 'smooth-route',
 };
