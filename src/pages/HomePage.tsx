@@ -12,7 +12,6 @@ import { projects } from '../data/projects';
 const email = 'kimbu0705@gmail.com';
 
 export function HomePage() {
-  const [toastVisible, setToastVisible] = useState(false);
   const [activeSection, setActiveSection] = useState('top');
 
   useEffect(() => {
@@ -51,11 +50,6 @@ export function HomePage() {
     };
   }, []);
 
-  const handleCopyEmail = () => {
-    setToastVisible(true);
-    window.setTimeout(() => setToastVisible(false), 2400);
-  };
-
   return (
     <>
       <DesktopOnlyNotice />
@@ -79,10 +73,7 @@ export function HomePage() {
           <WorkProcess />
           <ProductInterest />
         </main>
-        <Footer email={email} onCopyEmail={handleCopyEmail} />
-        <div className="toast" role="status" aria-live="polite" data-visible={toastVisible}>
-          이메일 주소를 복사했습니다.
-        </div>
+        <Footer email={email} />
       </div>
     </>
   );
