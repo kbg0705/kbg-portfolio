@@ -187,4 +187,39 @@ export const projectDetails: ProjectDetail[] = [
   },
 ];
 
+type DetailImage = ProjectDetail['artifacts'][number];
+
+const asset = (
+  type: DetailImage['type'],
+  src: string,
+  title: string,
+  description: string,
+  aspectRatio: DetailImage['aspectRatio'] = '16:10',
+): DetailImage => ({
+  src,
+  alt: title,
+  caption: description,
+  type,
+  aspectRatio,
+  placeholderTitle: title,
+  placeholderDescription: description,
+});
+
+const artifactImages: Record<string, DetailImage[]> = {
+  'print-studio': [
+    asset('artifact', 'public/images/projects/print-studio/02-file-guide.png', '파일 가이드 화면', '상품별 파일 가이드를 주문 흐름 안에서 확인하는 화면'),
+  ],
+  'print-decision-support': [
+    asset('artifact', 'public/images/projects/print-decision-support/02-affinity-map.png', 'Affinity Map', '고객과 운영자 인터뷰를 바탕으로 선택 기준을 묶은 리서치 산출물', '2:1'),
+  ],
+  'gachon-metaverse-campus': [
+    asset('artifact', 'public/images/projects/gachon-metaverse-campus/03-navigation-features.png', '캠퍼스 이동 기능', '포탈과 이동 버튼으로 목적지 탐색을 돕는 내비게이션 개선 화면'),
+    asset('product', 'public/images/projects/gachon-metaverse-campus/04-racing-content.png', '레이싱 콘텐츠', '방문 이후 반복 참여를 유도한 게임형 콘텐츠 화면'),
+  ],
+};
+
+projectDetails.forEach((detail) => {
+  detail.artifacts = artifactImages[detail.slug] ?? detail.artifacts.filter((image) => image.src);
+});
+
 export const findProjectDetail = (slug?: string) => projectDetails.find((detail) => detail.slug === slug);

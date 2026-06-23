@@ -159,5 +159,23 @@ export const archiveProjects: Project[] = [
   { slug: 'hci-vr', order: 12, tier: 'archive', service: 'HCI Research Lab', category: ['Research', 'Academic'], title: 'VR 사용성 연구', tagline: '사용자 관찰과 정성·정량 조사를 연구 현장에서 경험했습니다.', period: 'Research Experience', role: 'HCI 연구실 RA', contribution: '사용자 관찰 · 연구 지원 · 학술 활동', status: '연구 경험', tools: ['User Research', 'VR'], tags: ['HCI', 'VR', 'User Research'], problem: 'VR 환경의 행동과 사용성 이슈를 기록할 필요가 있었습니다.', decision: '사용자 관찰과 정성·정량 조사 및 학술 활동을 지원했습니다.', impact: [{ value: 'RA', label: 'VR 사용성 연구 지원', description: '공개 자료가 없어 텍스트 중심 제공', type: 'delivered' }], detailPageEnabled: false, description: 'HCI 연구실 RA로 사용자 관찰, VR 사용성 연구, 정성·정량 조사와 학술 활동을 지원했습니다.' },
 ];
 
+const coverImages: Record<string, string> = {
+  'printbank-npb': 'public/images/projects/printbank-npb/01-cover.png',
+  'tax-canvas': 'public/images/projects/tax-canvas/01-cover.png',
+  'print-studio': 'public/images/projects/print-studio/01-cover.png',
+  'print-decision-support': 'public/images/projects/print-decision-support/01-cover.png',
+  'gachon-metaverse-campus': 'public/images/projects/gachon-metaverse-campus/01-cover.png',
+  'smooth-route': 'public/images/projects/smooth-route/01-cover.png',
+  'my-ai-service-business': 'public/images/projects/MYAI/01-cover.png',
+  'picar-ar-sns': 'public/images/projects/PICAR/01-cover.png',
+};
+
+[...featuredProjects, ...compactProjects, ...archiveProjects].forEach((project) => {
+  const src = coverImages[project.slug];
+  if (!src) return;
+  project.thumbnail = project.thumbnail ?? image('cover', project.title, project.tagline);
+  project.thumbnail.src = src;
+});
+
 export const projects = [...featuredProjects, ...compactProjects, ...archiveProjects];
 export const findProject = (slug?: string) => projects.find((project) => project.slug === slug);

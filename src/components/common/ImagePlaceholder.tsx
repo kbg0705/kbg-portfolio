@@ -8,38 +8,22 @@ function resolveAssetPath(src: string) {
 }
 
 export function ImagePlaceholder({ image, onOpen, to }: { image: ProjectImage; onOpen?: () => void; to?: string }) {
+  if (!image.src) return null;
+
   const content = (
     <>
-      <span>IMAGE REQUIRED</span>
-      <strong>{image.placeholderTitle}</strong>
-      <p>{image.placeholderDescription}</p>
-      <small>권장 비율 {image.aspectRatio}{image.isConfidential ? ' · 비식별화 필요' : ''}</small>
+      <img src={resolveAssetPath(image.src)} alt={image.alt} loading="lazy" />
+      <em>{image.caption}</em>
     </>
   );
 
-  if (image.src) {
-    if (to) {
-      return (
-        <Link className="image-placeholder has-image" to={to}>
-          <img src={resolveAssetPath(image.src)} alt={image.alt} loading="lazy" />
-          <em>{image.caption}</em>
-        </Link>
-      );
-    }
-
-    return (
-      <button type="button" className="image-placeholder has-image" onClick={onOpen}>
-        <img src={resolveAssetPath(image.src)} alt={image.alt} loading="lazy" />
-        <em>{image.caption}</em>
-      </button>
-    );
+  if (to) {
+    return <Link className="image-placeholder has-image" to={to}>{content}</Link>;
   }
 
-  return onOpen ? (
-    <button type="button" className="image-placeholder" onClick={onOpen}>{content}</button>
-  ) : to ? (
-    <Link className="image-placeholder" role="img" aria-label={image.alt} to={to}>{content}</Link>
-  ) : (
-    <div className="image-placeholder" role="img" aria-label={image.alt}>{content}</div>
-  );
+  if (onOpen) {
+    return <button type="button" className="image-placeholder has-image" onClick={onOpen}>{content}</button>;
+  }
+
+  return <div className="image-placeholder has-image">{content}</div>;
 }

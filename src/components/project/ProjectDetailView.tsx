@@ -35,6 +35,8 @@ export function ProjectDetailView({
   active: string;
   onOpen: (image: ProjectImage) => void;
 }) {
+  const artifacts = detail.artifacts.filter((image) => image.src);
+  const hasFeedbackBacklog = Boolean(detail.feedbackBacklog?.image.src);
   const overview = [
     ['Period', project.period],
     ['Role', project.role],
@@ -56,7 +58,7 @@ export function ProjectDetailView({
             <p className="detail-tagline">{project.tagline}</p>
             <div className="tag-list">{project.tags.map((tag) => <span className="tag" key={tag}>{tag}</span>)}</div>
           </div>
-          {project.thumbnail ? <ImagePlaceholder image={project.thumbnail} onOpen={() => onOpen(project.thumbnail!)} /> : null}
+          {project.thumbnail?.src ? <ImagePlaceholder image={project.thumbnail} onOpen={() => onOpen(project.thumbnail!)} /> : null}
         </div>
       </header>
 
@@ -68,7 +70,8 @@ export function ProjectDetailView({
         <nav className="detail-toc" aria-label="상세 목차">
           <span>Contents</span>
           {detailSections
-            .filter((id) => id !== 'feedback-backlog' || detail.feedbackBacklog)
+            .filter((id) => id !== 'feedback-backlog' || hasFeedbackBacklog)
+            .filter((id) => id !== 'artifacts' || artifacts.length > 0)
             .map((id) => <a key={id} href={`#${id}`} aria-current={active === id ? 'location' : undefined}><i />{id}</a>)}
         </nav>
 
@@ -91,7 +94,7 @@ export function ProjectDetailView({
             </div>
           </Section>
 
-          {detail.feedbackBacklog ? (
+          {hasFeedbackBacklog && detail.feedbackBacklog ? (
             <Section id="feedback-backlog" eyebrow="From Feedback to Product Backlog" title={detail.feedbackBacklog.subtitle} wide>
               <div className="backlog-feature">
                 <div className="backlog-feature__copy">
@@ -128,17 +131,19 @@ export function ProjectDetailView({
                       <Fact label="Effect" text={item.effect} />
                     </div>
                   </div>
-                  {item.image ? <ImagePlaceholder image={item.image} onOpen={() => onOpen(item.image!)} /> : null}
+                  {item.image?.src ? <ImagePlaceholder image={item.image} onOpen={() => onOpen(item.image!)} /> : null}
                 </article>
               ))}
             </div>
           </Section>
 
-          <Section id="artifacts" eyebrow="From policy to product" title="정책과 산출물" wide>
-            <div className="artifact-grid">
-              {detail.artifacts.map((image) => <figure key={image.placeholderTitle}><ImagePlaceholder image={image} onOpen={() => onOpen(image)} /><figcaption>{image.caption}</figcaption></figure>)}
-            </div>
-          </Section>
+          {artifacts.length > 0 ? (
+            <Section id="artifacts" eyebrow="From policy to product" title="정책과 산출물" wide>
+              <div className="artifact-grid">
+                {artifacts.map((image) => <figure key={image.placeholderTitle}><ImagePlaceholder image={image} onOpen={() => onOpen(image)} /><figcaption>{image.caption}</figcaption></figure>)}
+              </div>
+            </Section>
+          ) : null}
 
           <Section id="collaboration" eyebrow="Collaboration & Delivery" title="협업과 실행">
             <ol className="text-list">{detail.collaboration.map((item) => <li key={item}>{item}</li>)}</ol>

@@ -9,7 +9,7 @@ export function ProjectCard({ project, compact = false }: { project: Project; co
   return (
     <article className={`project-card project-card--${project.tier}${compact ? ' is-compact' : ''}`}>
       <div className="project-card__meta"><span>{String(project.order).padStart(2, '0')}</span><p>{project.service}</p></div>
-      {project.thumbnail && !compact ? <ImagePlaceholder image={project.thumbnail} to={project.detailPageEnabled ? detailPath : undefined} /> : null}
+      {project.thumbnail ? <ImagePlaceholder image={project.thumbnail} to={project.detailPageEnabled ? detailPath : undefined} /> : null}
       <div className="project-card__content">
         <p className="project-card__category">{project.category.join(' · ')}</p>
         <h3>{project.title}</h3>
