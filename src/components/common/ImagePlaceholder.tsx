@@ -1,11 +1,6 @@
 import { useState } from 'react';
 import type { ProjectImage } from '../../types/project';
-
-function resolveAssetPath(src: string) {
-  if (/^(https?:)?\/\//.test(src) || src.startsWith('data:')) return src;
-  const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
-  return `${base}${src.replace(/^\/+/, '')}`;
-}
+import { resolveAssetPath } from '../../utils/assets';
 
 export function ImagePlaceholder({ image, onOpen }: { image: ProjectImage; onOpen?: () => void }) {
   const [hasError, setHasError] = useState(false);
@@ -18,7 +13,7 @@ export function ImagePlaceholder({ image, onOpen }: { image: ProjectImage; onOpe
     </>
   );
 
-  if (image.src && !hasError) {
+  if (image.src?.trim() && !hasError) {
     return (
       <button type="button" className="image-placeholder has-image" onClick={onOpen}>
         <img src={resolveAssetPath(image.src)} alt={image.alt} loading="lazy" onError={() => setHasError(true)} />
