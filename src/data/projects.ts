@@ -198,8 +198,25 @@ const coverImages: Record<string, string> = {
 
 const allProjects = [...featuredProjects, ...compactProjects, ...archiveProjects];
 
+const affiliations: Record<string, string> = {
+  'printbank-npb': '(주)프린트뱅크',
+  'printbank-main': '(주)프린트뱅크',
+  'magic-ecole': '(주)매직에꼴',
+  'tax-canvas': 'Tax Canvas',
+  'print-studio': '(주)프린트뱅크',
+  'print-decision-support': '이화여자대학교 디자인대학원',
+  'gachon-metaverse-campus': '가천대학교 메타버스 홍보단',
+  'visang-aidt': '비상교육',
+  'smooth-route': '팁스터 연합동아리',
+  'my-ai-service-business': '이화여자대학교 디자인대학원',
+  'picar-ar-sns': '가천대학교 졸업 프로젝트',
+  recommendation: '가천대학교 학부 프로젝트',
+  'hci-vr': '가천대학교 HCI 연구실',
+};
+
 allProjects.forEach((project, index) => {
   project.order = index + 1;
+  project.affiliation = affiliations[project.slug];
   project.detailPageEnabled = true;
   const src = coverImages[project.slug];
   if (!src) return;

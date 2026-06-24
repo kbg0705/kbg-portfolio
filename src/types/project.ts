@@ -47,6 +47,7 @@ export type Project = {
   period: string;
   role: string;
   contribution: string;
+  affiliation?: string;
   team?: string;
   status: string;
   tools: string[];

@@ -52,7 +52,7 @@ export function ProjectDetailView({
   const overview = [
     ['Period', project.period],
     ['Role', project.role],
-    ['Team', project.team ?? '프로젝트별 협업'],
+    ['소속', project.affiliation ?? '개인 프로젝트'],
     ['Status', project.status],
   ];
 
