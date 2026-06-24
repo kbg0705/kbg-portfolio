@@ -161,12 +161,13 @@ button.image-placeholder.has-image{
 .work-grid .project-card__content{display:grid;align-content:start}
 .work-grid .project-card h3{font-size:25px}
 .work-grid .project-card__tagline{margin:0;font-size:16px}
-.work-grid .project-card__description{display:-webkit-box;overflow:hidden;-webkit-box-orient:vertical;-webkit-line-clamp:3}
 .work-grid .image-placeholder.has-image,
-.home-featured-grid .image-placeholder.has-image{
+.home-featured-grid .image-placeholder.has-image,
+.project-card__media-placeholder{
   aspect-ratio:16 / 10;
   min-height:0;
   border:1px solid var(--p-line);
+  border-radius:8px;
   background:var(--p-surface);
 }
 .work-grid .image-placeholder.has-image img,
@@ -178,6 +179,15 @@ button.image-placeholder.has-image{
 }
 .work-grid .image-placeholder.has-image em,
 .home-featured-grid .image-placeholder.has-image em{display:none}
+.project-card__media-placeholder{
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  padding:20px;
+  color:var(--p-muted);
+}
+.project-card__media-placeholder span{color:var(--p-accent);font-size:12px;font-weight:850}
+.project-card__media-placeholder strong{max-width:80%;font-size:18px;line-height:1.4}
 .work-grid .detail-link{margin-top:18px}
 
 @media (min-width:1024px) and (max-width:1180px){
