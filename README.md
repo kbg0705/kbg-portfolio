@@ -38,5 +38,5 @@ pnpm run build
 ## 배포 주소
 
 ```text
-https://kbg0705.github.io/miricanvas-junior-pm-portfolio/
+https://kbg0705.github.io/kbg-portfolio/
 ```
