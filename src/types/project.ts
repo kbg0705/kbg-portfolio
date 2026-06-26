@@ -35,6 +35,13 @@ export type ProductDecision = {
   image?: ProjectImage;
 };
 
+export type KeyDecision = {
+  title: string;
+  problem: string;
+  judgment: string;
+  decision: string;
+};
+
 export type Project = {
   slug: string;
   order: number;
@@ -69,6 +76,7 @@ export type ProjectDetail = {
     outcome: string;
   };
   evidence: Evidence[];
+  keyDecisions?: KeyDecision[];
   feedbackBacklog?: {
     title: string;
     subtitle: string;

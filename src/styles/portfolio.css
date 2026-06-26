@@ -296,6 +296,13 @@ button.image-placeholder.has-image{
 .reading-column p{font-size:19px;line-height:1.9}
 .evidence-grid article{min-height:180px;padding:26px;background:#fafafd}
 .evidence-grid h3{margin:28px 0 10px;font-size:20px}
+.key-decision-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.key-decision-grid article{display:grid;align-content:start;gap:18px;min-height:360px;padding:26px;border:1px solid var(--p-line);border-top:2px solid var(--p-text);background:#fff}
+.key-decision-grid article>span{color:var(--p-accent);font-size:13px;font-weight:850}
+.key-decision-grid h3{margin:8px 0 4px;font-size:22px;line-height:1.35}
+.key-decision-grid div{padding-top:12px;border-top:1px solid var(--p-line)}
+.key-decision-grid div span{color:var(--p-muted);font-size:11px;font-weight:850;text-transform:uppercase}
+.key-decision-grid p{margin:7px 0 0;color:var(--p-muted);line-height:1.65}
 .decision-item--renewed{grid-template-columns:58px minmax(0,1fr);gap:28px;padding:40px 0}
 .decision-item--renewed .decision-item__body{min-width:0}
 .decision-item--renewed h3{font-size:30px}
@@ -379,6 +386,8 @@ button.image-placeholder.has-image{
   .project-facts div:nth-child(-n+2){border-bottom:1px solid var(--p-line)}
   .case-summary__problem p{font-size:22px}
   .detail-section .section-heading h2{font-size:36px}
+  .key-decision-grid{grid-template-columns:1fr}
+  .key-decision-grid article{min-height:0}
   .decision-item--renewed .decision-flow{grid-template-columns:1fr}
   .metric-hero>strong{font-size:104px}
   .about-hero__metric strong{font-size:68px}
@@ -423,6 +432,12 @@ button.image-placeholder.has-image{
   .hero-evidence{grid-template-columns:repeat(2,minmax(0,1fr))}
   .hero-evidence article:nth-child(2){border-right:0}
   .hero-evidence article:last-child{grid-column:1/-1;border-top:1px solid var(--p-line)}
+  .detail-layout--key-decisions{grid-template-columns:1fr;gap:48px}
+  .detail-layout--key-decisions .detail-toc{position:static;display:flex;flex-wrap:wrap;gap:8px;padding:0 0 18px;border-right:0;border-bottom:1px solid var(--p-line)}
+  .detail-layout--key-decisions .detail-toc>span{flex-basis:100%}
+  .detail-layout--key-decisions .detail-toc a{min-height:34px;padding:0 10px;border:1px solid var(--p-line);border-radius:999px;background:#fff}
+  .key-decision-grid{grid-template-columns:1fr}
+  .key-decision-grid article{min-height:0}
   .compact-grid,.home-featured-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .site-footer{grid-template-columns:1fr}
 }

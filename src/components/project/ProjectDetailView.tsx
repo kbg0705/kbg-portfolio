@@ -9,6 +9,7 @@ export const detailSections = [
   'summary',
   'context',
   'evidence',
+  'key-decisions',
   'feedback-backlog',
   'decisions',
   'artifacts',
@@ -21,6 +22,7 @@ const sectionLabels: Record<(typeof detailSections)[number], string> = {
   summary: '핵심 요약',
   context: '문제 맥락',
   evidence: '발견 근거',
+  'key-decisions': '핵심 의사결정',
   'feedback-backlog': '백로그',
   decisions: '제품 결정',
   artifacts: '산출물',
@@ -49,6 +51,7 @@ export function ProjectDetailView({
 }) {
   const artifacts = detail.artifacts.filter((image) => image.src);
   const hasFeedbackBacklog = Boolean(detail.feedbackBacklog?.image.src);
+  const hasKeyDecisions = Boolean(detail.keyDecisions?.length);
   const overview = [
     ['Period', project.period],
     ['Role', project.role],
@@ -79,11 +82,12 @@ export function ProjectDetailView({
         {overview.map(([label, value]) => <div key={label}><span>{label}</span><p>{value}</p></div>)}
       </section>
 
-      <div className="detail-layout">
+      <div className={`detail-layout${hasKeyDecisions ? ' detail-layout--key-decisions' : ''}`}>
         <nav className="detail-toc" aria-label="상세 목차">
           <span>Contents</span>
           {detailSections
             .filter((id) => id !== 'feedback-backlog' || hasFeedbackBacklog)
+            .filter((id) => id !== 'key-decisions' || hasKeyDecisions)
             .filter((id) => id !== 'artifacts' || artifacts.length > 0)
             .map((id) => <a key={id} href={`#${id}`} aria-current={active === id ? 'location' : undefined}><i />{sectionLabels[id]}</a>)}
         </nav>
@@ -106,6 +110,22 @@ export function ProjectDetailView({
               {detail.evidence.map((item, index) => <article key={item.label}><span>{String(index + 1).padStart(2, '0')}</span><h3>{item.label}</h3><p>{item.description}</p></article>)}
             </div>
           </Section>
+
+          {hasKeyDecisions ? (
+            <Section id="key-decisions" eyebrow="Key Decisions" title="핵심 의사결정">
+              <div className="key-decision-grid">
+                {detail.keyDecisions!.map((item, index) => (
+                  <article key={item.title}>
+                    <span>{String(index + 1).padStart(2, '0')}</span>
+                    <h3>{item.title}</h3>
+                    <Fact label="문제" text={item.problem} />
+                    <Fact label="판단" text={item.judgment} />
+                    <Fact label="결정" text={item.decision} />
+                  </article>
+                ))}
+              </div>
+            </Section>
+          ) : null}
 
           {hasFeedbackBacklog && detail.feedbackBacklog ? (
             <Section id="feedback-backlog" eyebrow="From feedback to backlog" title={detail.feedbackBacklog.subtitle}>
